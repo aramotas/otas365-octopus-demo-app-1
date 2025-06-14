@@ -18,17 +18,3 @@ step "run-a-script" {
         worker_pool_variable = ""
     }
 }
-
-step "send-an-email" {
-    name = "Send an Email"
-
-    action {
-        action_type = "Octopus.Email"
-        properties = {
-            Octopus.Action.Email.Body = "Hey! New things are up out there!"
-            Octopus.Action.Email.Subject = "Octopus update!"
-            Octopus.Action.Email.To = "aram.drekhshany@opentas.com"
-            Octopus.Action.Email.ToTeamIds = "global/everyone"
-        }
-    }
-}
