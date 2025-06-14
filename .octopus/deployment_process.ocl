@@ -1,7 +1,7 @@
 step "run-a-script" {
     name = "Run a Script"
     properties = {
-        Octopus.Action.TargetRoles = "otas365-demotapp-targets"
+        Octopus.Action.TargetRoles = "otas365-demotapp-targets,acme-web-server"
     }
 
     action {
@@ -10,7 +10,11 @@ step "run-a-script" {
             Octopus.Action.EnabledFeatures = "Octopus.Features.SelectPowerShellEditionForWindows"
             Octopus.Action.PowerShell.Edition = "Desktop"
             Octopus.Action.RunOnServer = "false"
-            Octopus.Action.Script.ScriptBody = "Write-Host \"Hello world!\""
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                $hello = "Hello World"
+                $hello | Out-File c:\drop\DP\output.txt
+                $hello | Out-File output-rel.txt
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
             OctopusUseBundledTooling = "False"
